@@ -1,75 +1,51 @@
-Overview of the project: The Multi-Unit Command Line Converter is a light utility written in Java for quickly converting values from one measurement system to another. The application is small and focused on the conversion process, supporting common physical (distance, mass, time, speed, temperature), digital (storage), and baseline currency rates.
-The tool can be used in two modes:
-Direct mode: The conversion process is initiated by supplying the parameters to the Java class in the command line.
+Overview of the Project:
 
-Interactive mode: The utility runs in a REPl (read-evaluate-print-loop) shell, allowing the user to perform several consecutive operations without restarting the program.
-The application supports the following categories: length, mass, time, speed, temperature, digital storage, and currencies. In length category, the supported units are millimeters, centimeters, meter, kilometers, inches, feet, yards, miles. Mass category contains milligrams, grams, kilograms, ton, ounce, pound. Time category has seconds, minutes, hours, days, weeks. Speed category: meter per second (
-m
-/
-s
-), kilometer per hour (
-k
-m
-/
-h
-), mile per hour (
-m
-p
-h
-), and knots. Temperature category: Celsius (
-C
-), Fahrenheit (
-F
-), Kelvin (
-K
-) with affine transformations. Digital storage category: bytes (
-B
-), kilobytes (
-K
-B
-), megabytes (
-M
-B
-), gigabytes (
-G
-B
-), terabytes (
-T
-B
-) with binary-based (
-1024
-n
-) conversions. The currencies are estimated in static rates against the US dollar: 1 USD is 0.89 EUR, 74.52 INR, 0.74 GBP, 107.64 JPY, 1.26 CAD, and 1.33 AUD.
+The Multi-Unit Command-Line Converter is a lightweight, cross-category conversion utility developed in Java. It allows users to rapidly convert values across common measurement systems—including physical units (length, mass, time, speed, temperature), digital data storage, and baseline currency estimates.
+The application offers dual execution modes:
+Direct CLI Execution: Pass arguments directly via the terminal for single-step conversions.
+Interactive REPL Shell: An interactive console interface for executing multiple conversions without restarting the program.
 
-The tool also supports flexible input parsing, such as 10 km m or 10 kilometers to meters, or even using slang terms like bucks and rupees. The input is checked for correctness and validity, such as ensuring that the source and target units are in the same category. Overall, the application gracefully handles incorrect input, such as wrong arguments count or invalid input parameters.
+Features:
+Multi-Category Conversion: Supports 7 distinct unit domains:
 
-The implementation is written in Java (JDK 14+). The main entry point is the Java class, which runs two modes: direct (by arguments) and interactive (REPl). The key methods are interactiveShell(), Process(), normalize(), runTemp(), getFactor(), and getGroup() . The code utilizes switch expressions, regular expressions with matches(), try-catch blocks, tokenization with split() , and Scanner for reading input from the console.
+Length: Millimeters, centimeters, meters, kilometers, inches, feet, yards, miles
+Mass: Milligrams, grams, kilograms, metric tons, ounces, poundsTime: Seconds, minutes, hours, days, weeks
+Speed: Meters per second ($m/s$), kilometers per hour ($km/h$), miles per hour ($mph$), knots
+Temperature: Celsius ($C$), Fahrenheit ($F$), Kelvin ($K$) via affine transformations
+Digital Storage: Bytes ($B$), Kilobytes ($KB$), Megabytes ($MB$), Gigabytes ($GB$), Terabytes ($TB$) using standard binary scaling ($1024^n$)
+Currencies: Static conversions between USD, EUR, INR, GBP, JPY, CAD, and AUD
 
-The input value and units are normalized in the runTemp() method, where the target unit is extracted from the input string. The trailing whitespaces are removed by trim(), lower-case with toLowerCase() , and pluralization removed (e.g., miles
-→
-mi, celsius
-→
-c). The temperature values are processed in runTemp() , first converted to Celsius, and then transformed into a target unit. All other categories use linear transformations, for which the factor is extracted with getFactor() . The target category is determined with getGroup() , and the conversion is performed by multiplying the input value by the corresponding scale factor:
+Flexible Natural Input Parsing: Handles variations such as 10 km m, 10 kilometers to meters, or colloquial terms like bucks and rupees.
+Category Safety Enforcement: Validates that source and target units belong to the same category to prevent invalid cross-domain conversions (e.g., length to time).
+Input Validation & Error Handling: Gracefully handles non-numeric inputs, incorrect parameter counts, and unsupported unit identifiers.
 
-Result
-=
-Input Value
-×
-Source Factor
-Target Factor
+Technical Specifications:
 
-The result is printed with 4 decimal places for all categories, except the temperature, which is printed with two decimal places.
+Language: Java (JDK)
+Primary Class: Java
+Core Methods: interactiveShell(), Process(), normalize(), runTemp(), getFactor(), getGroup()
+Data Structures & Concepts: Switch Expressions, Regular Expressions (matches), Exception Handling (try-catch), Tokenization (split), Scanner I/O
 
-How to Execute the Code: The file can be compiled with javac Java.java . To execute the program, supply the conversion parameters as command line arguments ( ): java Java 100 km mi java Java 98.6 f c
-The interactive mode allows to type the conversion requests in the shell with ~
+How It Works:
 
-(e.g., 50 km m) to ~
-(e.g., 10 miles to km). The available units can be listed with help or -l command in the shell. To exit the shell, type quit or exit .
+Input Normalization: The input unit strings are passed through normalize(), stripping trailing whitespace, converting to lowercase, and mapping plurals or aliases (e.g., "miles" $\rightarrow$ "mi", "celsius" $\rightarrow$ "c").
+Unit Isolation & Domain Check:
+Temperatures are routed through runTemp(), converting first to Celsius before reaching the final target unit.
+Linear Units retrieve baseline scale factors from getFactor(). The system verifies domain equivalence using getGroup(), then evaluates the conversion:
 
-Known edge case and fix: In the getGroup() method, the length units are matched with the pattern:
+$$\text{Result} = \frac{\text{Input Value} \times \text{Source Factor}}{\text{Target Factor}}$$
 
-Java u.matches("mm | cm | m | km | in | ft | yd")
-However, the miles (mi) is not included in the list, even though it is processed in getFactor() and normalize() methods. To allow the conversion with the miles, change the line above to:
-Java if (u.matches("mm | cm | m | km | in | ft | yd | mi")) return "len";
+Formatted Output: Outputs values with 4-decimal precision for general units and 2-decimal precision for temperature.
 
-Conclusion: The Multi-Unit Command Line Conversion utility is a light application, which makes frequently used unit conversion easier and faster, as it does not require the user to switch between several websites or applications for different categories. By implementing this utility, I was able to practice and reinforce the Java basics, such as the modular code structure, regular expressions, switch expressions, stream processing of the input string, and exception handling. In particular, the implementation of the conversion process for the two modes demonstrated how the program can process the user input of different formats. For future development, it would be interesting to support dynamic exchange rates with the API call.
+Execution Guide: 
+
+CompilationCompile the source file using standard javac Java.java
+Direct CLI ModeRun one-off conversions by passing 3 arguments (<value> <from> <to>):Bashjava Java 100 km mi
+java Java 98.6 f c
+Interactive Shell ModeLaunch the interactive console by providing no CLI arguments:Bashjava Java
+Supported interactive syntax:<value> <from> <to> (e.g., 50 km m)<value> <from> to <to> (e.g., 10 miles to km)help or -l to print the complete list of supported unitsquit or exit to terminate the shell sessionKnown Edge Case & Quick FixIn getGroup(), the regex for length is:Javau.matches("mm | cm | m | km | in | ft | yd")
+It currently omits mi (miles), even though mi is present in getFactor() and normalize(). To allow conversions involving miles, update that line to:Javaif (u.matches("mm | cm | m | km | in | ft | yd | mi")) return "len";
+
+Conclusion:
+
+The Multi-Unit Command-Line Converter serves as an efficient, lightweight utility designed to simplify complex unit conversions across multiple measurement systems into a single command-line interface. Through this project, core Java principles—such as modular method design, regular expressions, modern switch expressions, stream-based string parsing, and robust error handling—were directly applied to solve common everyday conversion challenges. Building both direct argument parsing and an interactive REPL shell provided practical experience in handling diverse user inputs, data validation, and programmatic conversion logic. Moving forward, potential enhancements include dynamic API integration for real-time currency rates and expanded unit categories.
