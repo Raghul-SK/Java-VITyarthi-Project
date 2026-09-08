@@ -29,4 +29,4 @@ No external dependencies: written in standard java, runs on any platform with a 
 Simple and intuitive: an in-session help menu (help, -l) reduces the learning and typing overhead for frequent users.
 
 Target Audience: 
-Engineering students and computer science students who need to complete or check homework problems in the terminal.Developers and system administrators who want to replace unwieldy website converters with a lightweight CLI utility.Electronics and physics enthusiasts who want to experiment with unit conversions in the shell.
+Engineering students and computer science students who need to complete or check homework problems in the terminal. Developers and system administrators who want to replace unwieldy website converters with a lightweight CLI utility. Electronics and physics enthusiasts who want to experiment with unit conversions in the shell.
