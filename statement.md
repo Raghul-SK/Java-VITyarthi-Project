@@ -23,7 +23,8 @@ Functional Scope
 6. Offers extensive exception checks for user input: handles missing or incorrect arguments gracefully and guides the user to the correct input.
 
 
-Non-functional Scope
+Non-functional Scope: 
+
 Very fast conversions ($\le 100\text{ ms}$). Interactive mode is immediate, while one-off calculations only take a moment to complete.
 No external dependencies: written in standard java, runs on any platform with a java virtual machine.
 Simple and intuitive: an in-session help menu (help, -l) reduces the learning and typing overhead for frequent users.
