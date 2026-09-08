@@ -31,7 +31,9 @@ Input Normalization: The input unit strings are passed through normalize(), stri
 Unit Isolation & Domain Check:
 Temperatures are routed through runTemp(), converting first to Celsius before reaching the final target unit.
 Linear Units retrieve baseline scale factors from getFactor(). The system verifies domain equivalence using getGroup(), then evaluates the conversion:
+
 $$\text{Result} = \frac{\text{Input Value} \times \text{Source Factor}}{\text{Target Factor}}$$
+
 Formatted Output: Outputs values with 4-decimal precision for general units and 2-decimal precision for temperature.
 
 Execution Guide
