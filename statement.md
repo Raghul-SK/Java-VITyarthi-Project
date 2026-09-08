@@ -10,12 +10,19 @@ OBJECTIVES:
 
 SCOPE OF THE PROJECT:
 Functional Scope
-One-off and interactive modes: can be used for simple one-command conversions, but also offers a continuous REPL-like session with user prompts for repeated conversions.
-Supports 7 types of measurement: handles everything from length/mass/time and speed to temperature, digital capacity, and currency.
-Simple natural language parser: recognizes plurals and non-standard abbreviations (miles, bucks, kilos, km/h, celsius), normalizes them to short equivalents.
-Enforces physical/mathematical constraints: double-checks category grouping regex to avoid impossible operations (accidentally mixing lengths with currency).
-Performs ratio and linear transforms accurately: uses ratio reductions for all but temperature transforms. All calculations reduced to a common scalar ratio up to 4 decimal points or rounded to 2 for linear temperature ($C, F, K$).
-Offers extensive exception checks for user input: handles missing or incorrect arguments gracefully and guides the user to the correct input. 
+1. One-off and interactive modes: can be used for simple one-command conversions, but also offers a continuous REPL-like session with user prompts for repeated conversions.
+
+2.Supports 7 types of measurement: handles everything from length/mass/time and speed to temperature, digital capacity, and currency.
+
+3. Simple natural language parser: recognizes plurals and non-standard abbreviations (miles, bucks, kilos, km/h, celsius), normalizes them to short equivalents.
+
+4. Enforces physical/mathematical constraints: double-checks category grouping regex to avoid impossible operations (accidentally mixing lengths with currency).
+
+5. Performs ratio and linear transforms accurately: uses ratio reductions for all but temperature transforms. All calculations reduced to a common scalar ratio up to 4 decimal points or rounded to 2 for linear temperature ($C, F, K$).
+
+6. Offers extensive exception checks for user input: handles missing or incorrect arguments gracefully and guides the user to the correct input.
+
+
 Non-functional Scope
 Very fast conversions ($\le 100\text{ ms}$). Interactive mode is immediate, while one-off calculations only take a moment to complete.
 No external dependencies: written in standard java, runs on any platform with a java virtual machine.
