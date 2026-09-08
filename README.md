@@ -58,7 +58,7 @@ u.matches("mm | cm | m | km | in | ft | yd")
 It currently omits mi (miles), even though mi is present in getFactor() and normalize(). To allow conversions involving miles, update that line to:
 
 Java
-if (u.matches("mm|cm|m|km|in|ft|yd|mi")) return "len";
+if (u.matches("mm | cm | m | km | in | ft | yd | mi")) return "len";
 
 Conclusion
 The Multi-Unit Command-Line Converter serves as an efficient, lightweight utility designed to simplify complex unit conversions across multiple measurement systems into a single command-line interface. Through this project, core Java principles—such as modular method design, regular expressions, modern switch expressions, stream-based string parsing, and robust error handling—were directly applied to solve common everyday conversion challenges. Building both direct argument parsing and an interactive REPL shell provided practical experience in handling diverse user inputs, data validation, and programmatic conversion logic. Moving forward, potential enhancements include dynamic API integration for real-time currency rates and expanded unit categories.
