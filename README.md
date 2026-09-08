@@ -54,7 +54,7 @@ Known Edge Case & Quick Fix
 In getGroup(), the regex for length is:
 
 Java
-u.matches("mm|cm|m|km|in|ft|yd")
+u.matches("mm | cm | m | km | in | ft | yd")
 It currently omits mi (miles), even though mi is present in getFactor() and normalize(). To allow conversions involving miles, update that line to:
 
 Java
