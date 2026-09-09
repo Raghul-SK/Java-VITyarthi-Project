@@ -201,15 +201,15 @@ public class Java
             }
             in.close();
         }
-        static void printHelp()
-        {
-            System.out.println("Unit you can use :");
-            System.out.println("  Length  : mm, cm, m, km, in, ft, yd, mi");
-            System.out.println("  Mass  : mg, g, kg, ton, oz, lb");
-            System.out.println("  Time  : s, min, h, day, wk");
-            System.out.println("  Speed  : mps, kph, mph, knot");
-            System.out.println("  Temperature  : c, f, k");
-            System.out.println("  data  : b, kb, mb, gb, tb");
-            System.out.println("  Currency : usd, eur, inr, gbp, jpy, cad, aud");
-        }
+    static void printHelp()
+    {
+        System.out.println("Unit you can use :");
+        System.out.println("  Length  : mm, cm, m, km, in, ft, yd, mi");
+        System.out.println("  Mass  : mg, g, kg, ton, oz, lb");
+        System.out.println("  Time  : s, min, h, day, wk");
+        System.out.println("  Speed  : mps, kph, mph, knot");
+        System.out.println("  Temperature  : c, f, k");
+        System.out.println("  data  : b, kb, mb, gb, tb");
+        System.out.println("  Currency : usd, eur, inr, gbp, jpy, cad, aud");
     }
+}
